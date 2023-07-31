@@ -4,10 +4,11 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserModule } from './user/user.module';
 import { ItinerarioModule } from './itinerario/itinerario.module';
 import { ReservacionModule } from './reservacion/reservacion.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    BusesModule,
     TypeOrmModule.forRoot({
       type: "mysql",
       host: "localhost",
@@ -18,9 +19,13 @@ import { ReservacionModule } from './reservacion/reservacion.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    
+    BusesModule,
     UserModule,
     ItinerarioModule,
     ReservacionModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
