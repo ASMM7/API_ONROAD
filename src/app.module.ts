@@ -6,9 +6,13 @@ import { ItinerarioModule } from './itinerario/itinerario.module';
 import { ReservacionModule } from './reservacion/reservacion.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { ScheduleModule } from '@nestjs/schedule';
+//import { ScheduledTasksService } from './scheduled-tasks.service';
+
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRoot({
       type: "mysql",
       host: "localhost",
@@ -28,6 +32,8 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: []
+
+ ///providers: [ScheduledTasksService],
 })
 export class AppModule {}

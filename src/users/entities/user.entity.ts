@@ -1,7 +1,9 @@
-import { Column, DeleteDateColumn, Entity } from "typeorm";
+import { Column, DeleteDateColumn, Entity} from "typeorm";
+import { RolUser } from "../const/rol_users";
+
 
 @Entity()
-export class User {
+export class UsuarioEntity {
     
     @Column({primary: true, generated :true})
     id: number;
@@ -15,8 +17,8 @@ export class User {
     @Column({nullable:false})
     password: string;
 
-    @Column({default:"user"})
-    rol:string;
+    @Column({default:"User"})
+    rol: RolUser;
     
     @DeleteDateColumn()
     deleteAt: Date;

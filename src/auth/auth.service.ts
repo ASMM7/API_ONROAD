@@ -8,6 +8,7 @@ import { RegisterDto } from './dto/register.dto';
 import * as bcryptjs from 'bcryptjs';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { RolUser } from 'src/users/const/rol_users';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +16,8 @@ export class AuthService {
     private readonly userService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
+
+  
 
   async register({ name, email, password }: RegisterDto) {
     try {
@@ -25,8 +28,9 @@ export class AuthService {
       }
       return this.userService.create({
         name,
-        email: user.email,
+        email,
         password: await bcryptjs.hash(password, 12),
+        rol: typeof RolUser.onCli as any
       });
     } catch (e) {
       return {
@@ -49,7 +53,7 @@ export class AuthService {
         throw new UnauthorizedException('Invalid credentials');
       }
 
-      const payload = { email: user.email };
+      const payload = { email: user.email , rol : user.rol};
       const token = await this.jwtService.signAsync(payload);
 
       return { token, email };
