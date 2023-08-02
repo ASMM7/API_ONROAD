@@ -18,19 +18,7 @@ export class ItinerarioService {
 
   async create(createItinerarioDto: CreateItinerarioDto): Promise<Itinerario> {
     try {
-      const {
-        origin_city,
-        destination_city,
-        departure_date,
-        arrival_date,
-        price,
-      } = createItinerarioDto;
-      const itinerario = new Itinerario();
-      itinerario.origin_city = origin_city;
-      itinerario.destination_city = destination_city;
-      itinerario.departure_date = departure_date;
-      itinerario.arrival_date = arrival_date;
-      itinerario.price = price;
+      const itinerario = this.itinerarioRepository.create(createItinerarioDto);
       return this.itinerarioRepository.save(itinerario);
     } catch (e) {
       console.error('Error:', e.message, e.statusCode);

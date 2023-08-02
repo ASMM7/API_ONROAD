@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { BusesModule } from './buses/buses.module';
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { UserModule } from './user/user.module';
 import { ItinerarioModule } from './itinerario/itinerario.module';
 import { ReservacionModule } from './reservacion/reservacion.module';
 import { UsersModule } from './users/users.module';
@@ -25,7 +24,6 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     
     BusesModule,
-    UserModule,
     ItinerarioModule,
     ReservacionModule,
     UsersModule,

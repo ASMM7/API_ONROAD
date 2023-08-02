@@ -11,13 +11,9 @@ export class ReservacionService {
     private readonly reservacionRepository: Repository<Reservacion>,
   ) {}
 
-  async create(
-    createReservacionDto: CreateReservacionDto,
-  ): Promise<Reservacion> {
+  async create(createReservacionDto: CreateReservacionDto): Promise<Reservacion> {
     try {
-      const { seat_number } = createReservacionDto;
-      const reservacion = new Reservacion();
-      reservacion.seat_number = seat_number;
+      const reservacion = this.reservacionRepository.create(createReservacionDto)
       return this.reservacionRepository.save(reservacion);
     } catch (e) {
       console.error('Error:', e.message, e.statusCode);

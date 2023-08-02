@@ -1,5 +1,7 @@
 import {
   BadRequestException,
+  HttpException,
+  HttpStatus,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -30,19 +32,27 @@ export class BusesService {
         throw new BadRequestException('Itinerario not found');
       }
 
+      const { plateNumber, operator, seatCapacity, type_seat, added_value } =
+        createBusDto;
+
+      const existeBus = await this.busRepository.findOneBy({ plateNumber });
+
+      if (existeBus) {
+        throw new HttpException('Bus already exists', HttpStatus.CONFLICT);
+      }
+
       const bus = this.busRepository.create({
-        plateNumber: createBusDto.plateNumber,
-        operator: createBusDto.operator,
-        seatCapacity: createBusDto.seatCapacity,
-        type_seat: createBusDto.type_seat,
-        added_value: createBusDto.added_value,
+        plateNumber,
+        operator,
+        seatCapacity,
+        type_seat,
+        added_value,
         itinerario,
       });
+
       return await this.busRepository.save(bus);
     } catch (e) {
       return {
-        statusCode: 404,
-        message: e.message,
         error: e,
       };
     }
@@ -55,7 +65,7 @@ export class BusesService {
   async findBusById(id: number): Promise<Bus> {
     const bus = await this.busRepository.findOne({ where: { id } });
     if (!bus) {
-      throw new NotFoundException('Bus not found');
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
     return bus;
   }

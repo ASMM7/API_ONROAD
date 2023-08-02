@@ -9,6 +9,7 @@ export class CreateItinerarioDto {
     @IsNotEmpty()
     @IsString()
     destination_city: string;
+    
     @IsNotEmpty()
     @IsDate()
     @Type(() => Date)

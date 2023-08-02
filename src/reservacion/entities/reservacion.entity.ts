@@ -2,7 +2,8 @@ import { Itinerario } from "src/itinerario/entities/itinerario.entity";
 import {
     Column,DeleteDateColumn,Entity,JoinColumn,ManyToOne,OneToOne,PrimaryGeneratedColumn} from "typeorm";
   
-import { User } from "src/user/entities/user.entity";
+//import { User } from "src/user/entities/user.entity";
+import { UsuarioEntity } from "src/users/entities/user.entity";
 
 @Entity()
 export class Reservacion {
@@ -13,9 +14,9 @@ export class Reservacion {
     @Column()
     seat_number: number;
 
-    @OneToOne(()=> User, (user)=> user.id,{ eager: true })
+    @OneToOne(()=> UsuarioEntity, (user)=> user.id,{ eager: true })
     @JoinColumn()
-    user: User;
+    user: UsuarioEntity;
     
     @ManyToOne(() => Itinerario, itinerario => itinerario.id,{
         eager: true,

@@ -1,7 +1,6 @@
-import { Column, DeleteDateColumn, Entity} from "typeorm";
+import { Column, DeleteDateColumn, Entity, OneToOne} from "typeorm";
 import { RolUser } from "../const/rol_users";
-
-
+import { Reservacion } from "src/reservacion/entities/reservacion.entity";
 @Entity()
 export class UsuarioEntity {
     
@@ -19,6 +18,11 @@ export class UsuarioEntity {
 
     @Column({default:"User"})
     rol: RolUser;
+
+
+    @OneToOne(() =>Reservacion, (reservacion) => reservacion.user)
+   
+   reservacion: Reservacion;
     
     @DeleteDateColumn()
     deleteAt: Date;

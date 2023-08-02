@@ -1,10 +1,12 @@
 import { IsNotEmpty, IsString , IsInt, Min, Max, IsOptional} from "class-validator";
+import { Unique } from "typeorm";
 
 
 export class CreateBusDto {
 
     @IsNotEmpty()
     @IsString()
+    @Unique(['plateNumber'])
     plateNumber: string;
     
     @IsNotEmpty()
@@ -23,7 +25,8 @@ export class CreateBusDto {
        
     @IsNotEmpty()
     @IsString()
-    added_value: string;
+    @IsOptional()
+    added_value?: string;
 
     @IsInt()
     @IsOptional()

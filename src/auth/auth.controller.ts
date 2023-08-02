@@ -11,9 +11,9 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from './guard/auth.guard';
 import { Request } from 'supertest';
-import { RolUser } from 'src/user/enum/rol_user';
 import { Roles } from './decorators/roles.decorator';
 import { RolesGuard } from './guard/roles.guard';
+import { RolUser } from 'src/users/const/rol_users';
 
 
 interface RequestWithUser extends Request{
