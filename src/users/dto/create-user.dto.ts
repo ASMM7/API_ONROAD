@@ -1,6 +1,6 @@
 import { Transform } from "class-transformer";
 import { RolUser } from "../const/rol_users";
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsEnum, IsNotEmpty, IsString } from "class-validator";
 import { Unique } from "typeorm";
 
 export class CreateUserDto {
@@ -21,6 +21,6 @@ export class CreateUserDto {
     @IsString()
     password: string;
 
-    
-    rol: RolUser;
+    @IsEnum(RolUser)
+    rol?: RolUser;
 }

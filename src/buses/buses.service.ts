@@ -3,7 +3,6 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
-  NotFoundException,
 } from '@nestjs/common';
 import { CreateBusDto } from './dto/create-bus.dto';
 import { UpdateBusDto } from './dto/update-bus.dto';
@@ -46,8 +45,7 @@ export class BusesService {
         operator,
         seatCapacity,
         type_seat,
-        added_value,
-        itinerario,
+        added_value
       });
 
       return await this.busRepository.save(bus);

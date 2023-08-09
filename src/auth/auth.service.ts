@@ -20,7 +20,8 @@ export class AuthService {
   
 
   async register({ name, email, password }: RegisterDto) {
-    try {
+
+      try{
       const user = await this.userService.findOneByEmail(email);
 
       if (user) {
@@ -29,17 +30,22 @@ export class AuthService {
       return this.userService.create({
         name,
         email,
-        password: await bcryptjs.hash(password, 12),
-        rol: typeof RolUser.onCli as any
+        password: await bcryptjs.hash(password, 12)
       });
-    } catch (e) {
-      return {
-        statusCode: 404,
-        message: e.message,
-        error:e
+
+      return{
+        name, 
+        email
       };
+      }catch(e){
+        return{
+          statusCode: 404,
+          message: e.message,
+          error:e
+        };
+      }
     }
-  }
+     
 
   async login({ email, password }: LoginDto) {
     try {
@@ -65,5 +71,9 @@ export class AuthService {
         };
       }
     }
-  }
+
+    async profile({email,rol}: {email:string,rol:RolUser}){
+      return this.userService.findOneByEmail(email);
+    }
+}
 

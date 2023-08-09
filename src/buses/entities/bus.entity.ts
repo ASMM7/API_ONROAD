@@ -1,5 +1,5 @@
 import {
-  Column,DeleteDateColumn,Entity,JoinColumn,ManyToOne,PrimaryGeneratedColumn} from "typeorm";
+  Column,DeleteDateColumn,Entity,OneToMany,PrimaryGeneratedColumn} from "typeorm";
 
   import { Itinerario } from "src/itinerario/entities/itinerario.entity";
 
@@ -23,10 +23,11 @@ export class Bus {
   @Column()
   added_value: string;
 
-  @ManyToOne(()=> Itinerario, itinerario => itinerario.id,{
+  @OneToMany(() => Itinerario, itinerario => itinerario.buss,{
     eager: true,
   })
-  itinerario: Itinerario;
+
+  itinerario : Itinerario[]; 
     
   @DeleteDateColumn()
   deletedAt: Date;

@@ -1,4 +1,4 @@
-export const enum RolUser{
+export  enum RolUser{
     onRoad='ON-ROAD',
     onCli='ON-CLI'
 }

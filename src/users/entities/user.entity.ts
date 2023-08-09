@@ -13,16 +13,15 @@ export class UsuarioEntity {
     @Column({ unique:true, nullable:false})
     email: string;
     
-    @Column({nullable:false})
+    @Column({nullable:false })
     password: string;
 
-    @Column({default:"User"})
+    @Column({default:"ON-CLI"})
     rol: RolUser;
 
 
     @OneToOne(() =>Reservacion, (reservacion) => reservacion.user)
-   
-   reservacion: Reservacion;
+    reservacion: Reservacion;
     
     @DeleteDateColumn()
     deleteAt: Date;

@@ -2,7 +2,7 @@
 import { Bus } from "src/buses/entities/bus.entity";
 import { Reservacion } from "src/reservacion/entities/reservacion.entity";
 import {
-    Column,DeleteDateColumn,Entity,OneToMany,PrimaryGeneratedColumn} from "typeorm";
+    Column,DeleteDateColumn,Entity,JoinColumn,ManyToOne,OneToMany,PrimaryGeneratedColumn} from "typeorm";
 @Entity()  
 export class Itinerario {
 
@@ -28,8 +28,9 @@ export class Itinerario {
     reservacion: Reservacion[];
 
    
-    @OneToMany(() => Bus, bus => bus.itinerario)  
-    buses: Bus[];
+    @ManyToOne(() => Bus, bus => bus.itinerario)  
+    @JoinColumn({ name: 'bus_id' })
+    buss: Bus;
     
 
     @DeleteDateColumn()

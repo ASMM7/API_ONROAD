@@ -28,6 +28,4 @@ export class CreateItinerarioDto {
     @Max(100)
     price: number;
 
-  
-
 }

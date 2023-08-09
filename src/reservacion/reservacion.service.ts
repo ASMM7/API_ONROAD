@@ -21,7 +21,7 @@ export class ReservacionService {
   }
 
   async findAll(): Promise<Reservacion[]> {
-    return this.reservacionRepository.find();
+    return this.reservacionRepository.find({ relations : ['itinerario']});
   }
 
   async findReservacionById(id: number): Promise<Reservacion> {

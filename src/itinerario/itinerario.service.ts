@@ -18,6 +18,10 @@ export class ItinerarioService {
 
   async create(createItinerarioDto: CreateItinerarioDto): Promise<Itinerario> {
     try {
+
+
+
+      
       const itinerario = this.itinerarioRepository.create(createItinerarioDto);
       return this.itinerarioRepository.save(itinerario);
     } catch (e) {
@@ -26,7 +30,7 @@ export class ItinerarioService {
   }
 
   async findAll(): Promise<Itinerario[]> {
-    return this.itinerarioRepository.find();
+    return this.itinerarioRepository.find({ relations : ['buss']});
   }
 
   async findItinerarioById(id: number): Promise<Itinerario> {
